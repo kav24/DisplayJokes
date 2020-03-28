@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="10dp"
+    android:padding="10dp"
+    android:layout_gravity="">
+
+    <TextView
+        android:id="@+id/userInput"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:text="@string/userInput"
+        android:gravity="bottom"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingRight="5dp"/>
+
+    <EditText
+        android:id="@+id/numberOfJokes"
+        android:layout_width="46dp"
+        android:layout_height="match_parent"
+        android:inputType="text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/generateWidgets"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:enabled="true"
+        android:gravity_layout="bottom"
+        android:text="@string/generate" />
+
+</LinearLayout>
