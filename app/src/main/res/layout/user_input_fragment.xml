@@ -2,34 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginHorizontal="10dp"
+    android:layout_margin="10dp"
     android:padding="10dp"
+    android:background="#1D1E33"
     android:layout_gravity="">
 
     <TextView
         android:id="@+id/userInput"
         android:layout_width="120dp"
         android:layout_height="match_parent"
-        android:text="@string/userInput"
+        android:fontFamily="@font/quicksand_medium"
         android:gravity="bottom"
+        android:paddingEnd="5dp"
+        android:text="@string/userInput"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:paddingRight="5dp"/>
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/numberOfJokes"
         android:layout_width="46dp"
         android:layout_height="match_parent"
-        android:inputType="text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:fontFamily="@font/quicksand_light"
+        android:inputType="numberDecimal"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF" />
 
-    <Button
-        android:id="@+id/generateWidgets"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:enabled="true"
-        android:gravity_layout="bottom"
-        android:text="@string/generate" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="20dp">
+        <Button
+            android:id="@+id/generateWidgets"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/round_border_button"
+            android:layout_marginRight="10dp"
+            android:enabled="false"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="@string/generate"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/clearWidget"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/round_border_button"
+            android:enabled="true"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="@string/clear"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
 
 </LinearLayout>

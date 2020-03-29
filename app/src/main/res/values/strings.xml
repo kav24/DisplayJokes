@@ -1,5 +1,5 @@
 <resources>
-    <string name="generateJokes">Generate Jokes</string>
+    <string name="generateJokes">Get Joke</string>
     <string name="app_name">Joke Generator</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -93,4 +93,5 @@
     <string name="action_settings">Settings</string>
     <string name="userInput">Number of jokes</string>
     <string name="generate">Generate!</string>
+    <string name="clear">Clear</string>
 </resources>

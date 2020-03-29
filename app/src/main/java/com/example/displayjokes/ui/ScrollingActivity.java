@@ -3,8 +3,10 @@ package com.example.displayjokes.ui;
 import android.os.Bundle;
 
 import com.example.displayjokes.R;
+import com.example.displayjokes.model.ListItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,22 +20,37 @@ public class ScrollingActivity extends AppCompatActivity{
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private List<ListItem> listItems;
+    private List<ListItem> listItems = new ArrayList<>();
+    private UserInputFragment userInputFragment;
     private static Integer jokesBeingDisplayed = 0;
-    public static Bundle myBundle = new Bundle();
-    public final static String numKey = "numJokes";
+    public static Integer myBundle = Integer.valueOf(0);
+
+    /**
+     * This will build the main activity. State should be saved when the phone rotates
+     * and not new activity will be built
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
+        FragmentManager fm = this.getSupportFragmentManager();
+        userInputFragment = (UserInputFragment) fm.findFragmentById(R.id.userInput);
 
+        if(userInputFragment == null){
+            userInputFragment = new UserInputFragment(this);
+            fm.beginTransaction()
+                    .add(R.id.userInputFrame, userInputFragment)
+                    .commit();
+        }
         recyclerView = findViewById(R.id.recycler_View);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listItems = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            ListItem item = new ListItem("Lorem ipsum dummy text");
+        jokesBeingDisplayed = (myBundle != null)? myBundle:0;
+        for(int i = 0; i < jokesBeingDisplayed; i++) {
+            ListItem item = new ListItem();
             listItems.add(item);
         }
         adapter = new MyAdapter(listItems, this);
@@ -42,25 +59,21 @@ public class ScrollingActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-
         getMenuInflater().inflate(R.menu.menu_scrolling, menu);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
 }

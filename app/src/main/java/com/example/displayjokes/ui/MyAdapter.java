@@ -7,32 +7,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.displayjokes.R;
 import com.example.displayjokes.http.GetJokeTask;
 import com.example.displayjokes.model.Joke;
+import com.example.displayjokes.model.ListItem;
 
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<ListItem> listItems;
     private Context context;
-    private OnButtonClickedListener bListener;
-    //private final View.OnClickListener mOnClickListener = new MyOnClickListener();
 
      public MyAdapter(List<ListItem> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
-        this.bListener = bListener;
     }
-
+    /**
+     * This will create the view holder.
+     */
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.joke_item,parent, false);
-        return new ViewHolder(v, bListener);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -45,17 +43,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return listItems.size();
     }
 
+    /**
+     * This will handle the creation of individual jokes
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
         public Button getJokeButton;
         public TextView jokeText;
-        OnButtonClickedListener onNoteListener;
 
-        public ViewHolder(@NonNull View itemView, OnButtonClickedListener onButtonClickedListener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             final Joke[] newJoke = new Joke[1];
             getJokeButton = (Button) itemView.findViewById(R.id.generateJoke);
             jokeText = (TextView) itemView.findViewById(R.id.jokeText);
-            this.onNoteListener = onButtonClickedListener;
             getJokeButton.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("StaticFieldLeak")
                 @Override
@@ -72,21 +71,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                         }.execute();
 
                     }catch (Exception e){
-
+                        e.printStackTrace();
                     }
                 }
             });
         }
     }
-
-    public interface OnButtonClickedListener {
-        void onItemClicked(int position);
-    }/*
-
-    public void setOnItemClickedListener(View.OnClickListener listener){
-         ScrollingActivity.myBundle.putInt(ScrollingActivity.numKey, );
-    }*/
-
 
 }
 
